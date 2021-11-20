@@ -1,0 +1,41 @@
+body {
+    text-align: center;
+    padding-top: 100px;
+    font-family: Arial;
+    background-color:antiquewhite;
+}
+
+.winner {
+  color: chartreuse;
+}
+
+.draw {
+  color: goldenrod;
+}
+
+#settings, #numInput{
+    color:grey;
+}
+
+#numInput{
+    width:50px;
+    border-radius: 5px;
+    background-color: transparent;
+    border:0;
+    font-weight: bold;
+    font-size:medium;
+}
+
+button{
+    width: 100px;
+    height: 20px;
+    border: 0;
+    border-radius: 5px;
+}
+
+button#reset{
+    background: rgb(224, 103, 103);
+    color:#fff;
+    height: 30px;
+}
+
