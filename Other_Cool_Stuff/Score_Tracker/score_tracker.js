@@ -25,8 +25,7 @@ p2btn.addEventListener('click', () => {
 
 reset.addEventListener('click', () => {
     resetAll();
-});
-
+}); 
 
 const increase = (param) => {
     let score;
