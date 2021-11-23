@@ -37,7 +37,6 @@ const loadGame = (x) => {
                 }
             } else {
                 choices[index].style.backgroundColor = 'var(--bg-color)';
-                choices[index].style.transition = 'background-color 0.5s';
                 message.textContent = 'TRY AGAIN!';
             }
         });
@@ -70,6 +69,7 @@ loadBtn.addEventListener('mouseover', () => {
 loadBtn.addEventListener('mouseout', () => {
     loadBtn.classList.remove('selected');
 });
+loadBtn.onfullscreenchange = loadBtn.classList.remove('selected');
 
 // Setting the click event listener for the setting buttons
 let modeSetters = document.querySelectorAll('#settings button');
@@ -78,6 +78,7 @@ modeSetters[0].addEventListener('click', () => {
     if (!(modeSetters[0].classList.contains('selected'))) {
         modeSetters[0].classList.toggle('selected');
         modeSetters[1].classList.toggle('selected');
+        banner.style.backgroundColor = 'var(--global-color)';
         loadGame(tiles);
     }
     if (modeSetters[0].classList.contains('selection')) {
@@ -98,6 +99,7 @@ modeSetters[1].addEventListener('click', () => {
     if (!(modeSetters[1].classList.contains('selected'))) {
         modeSetters[1].classList.toggle('selected');
         modeSetters[0].classList.toggle('selected');
+        banner.style.backgroundColor = 'var(--global-color)';
         loadGame(tiles);
     }
     if (modeSetters[1].classList.contains('selection')) {
