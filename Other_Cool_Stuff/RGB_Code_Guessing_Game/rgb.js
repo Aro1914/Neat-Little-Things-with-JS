@@ -29,8 +29,8 @@ const loadGame = (x) => {
         choices[index].style.backgroundColor = `${bgColor[index]}`;
         choices[index].addEventListener('click', e => {
             if (choices[index].style.backgroundColor === goal) {
-                for (let index = 0; index < x; index++) {
-                    choices[index].style.backgroundColor = goal;
+                for (let i = 0; i < x; i++) {
+                    choices[i].style.backgroundColor = goal;
                     banner.style.backgroundColor = goal;
                     banner.style.transition = 'background-color 0.5s';
                     message.textContent = 'CORRECT!';
@@ -64,18 +64,54 @@ loadBtn.addEventListener('click', () => {
     banner.style.backgroundColor = 'var(--global-color)';
     message.textContent = 'TRY ONE!';
 });
+loadBtn.addEventListener('mouseover', () => {
+    loadBtn.classList.add('selected');
+});
+loadBtn.addEventListener('mouseout', () => {
+    loadBtn.classList.remove('selected');
+});
 
 // Setting the click event listener for the setting buttons
 let modeSetters = document.querySelectorAll('#settings button');
 modeSetters[0].addEventListener('click', () => {
     tiles = 3;
-    modeSetters[0].classList.toggle('selected');
-    modeSetters[1].classList.toggle('selected');
-    loadGame(tiles);
+    if (!(modeSetters[0].classList.contains('selected'))) {
+        modeSetters[0].classList.toggle('selected');
+        modeSetters[1].classList.toggle('selected');
+        loadGame(tiles);
+    }
+    if (modeSetters[0].classList.contains('selection')) {
+        modeSetters[0].classList.remove('selection');
+    }
 });
+modeSetters[0].addEventListener('mouseover', () => {
+    if (!(modeSetters[0].classList.contains('selected'))) {
+        modeSetters[0].classList.add('selection');
+    }
+});
+modeSetters[0].addEventListener('mouseout', () => {
+    modeSetters[0].classList.remove('selection');
+});
+
 modeSetters[1].addEventListener('click', () => {
     tiles = 6
-    modeSetters[1].classList.toggle('selected');
-    modeSetters[0].classList.toggle('selected');
-    loadGame(tiles);
+    if (!(modeSetters[1].classList.contains('selected'))) {
+        modeSetters[1].classList.toggle('selected');
+        modeSetters[0].classList.toggle('selected');
+        loadGame(tiles);
+    }
+    if (modeSetters[1].classList.contains('selection')) {
+        modeSetters[1].classList.remove('selection');
+    }
+});
+
+modeSetters[1].addEventListener('mouseover', () => {
+    if (!(modeSetters[1].classList.contains('selected'))) {
+        modeSetters[1].classList.add('selection');
+    }
+});
+modeSetters[1].addEventListener('mouseout', () => {
+    if (modeSetters[1].classList.contains('selection')) {
+        modeSetters[1].classList.remove('selection');
+    }
 });
