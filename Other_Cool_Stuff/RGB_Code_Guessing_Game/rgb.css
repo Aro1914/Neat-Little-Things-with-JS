@@ -91,6 +91,14 @@ h1 + div {
   background-color: var(--global-color) !important;
 }
 
+.selected:hover {
+  background-image: linear-gradient(
+    180deg,
+    var(--global-color) 85%,
+    rgb(255, 255, 255) 100%
+  );
+}
+
 #message {
   color: var(--global-color);
   font-weight: bold;
