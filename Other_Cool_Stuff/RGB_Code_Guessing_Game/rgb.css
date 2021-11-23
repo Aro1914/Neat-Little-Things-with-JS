@@ -31,7 +31,7 @@ button:active {
 }
 
 h1 {
-  text-shadow: 2px 2px 3px var(--global-color);
+  text-shadow: 2px 2px 3px rgb(0, 0, 0, 0.3);
   margin: 0;
   padding: 20px;
   background-color: var(--global-color);
@@ -52,7 +52,6 @@ h1 + div {
 
 #tool-bar {
   width: 80%;
-  height: 25px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -124,4 +123,15 @@ h1 + div {
 
 #wrong-choice {
   background-color: var(--bg-color);
+}
+
+@media only screen and (max-width: 767px) {
+  #tool-bar {
+    width: 90%;
+    justify-content: center;
+  }
+
+  #choices {
+    width: 80%;
+  }
 }
