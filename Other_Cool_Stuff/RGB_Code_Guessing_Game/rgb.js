@@ -1,15 +1,12 @@
-// The array that holds the background-color of each choice div
 let bgColor = [];
-
-let banner = document.querySelector('h1');
-let hidden = document.querySelector('h1 span');
-let message = document.querySelector('#message');
-
+const banner = document.querySelector('h1');
+const hidden = document.querySelector('h1 span');
+const message = document.querySelector('#message');
 let tiles = 6;
-
-// Define the function to load the Game or just reset the bgs of each choice div
 let goal;
-const loadGame = (x) => {
+const choices = document.querySelectorAll('#choices div');
+
+const gameSetup = (x) => {
     for (let index = 0; index < x; index++) {
         let r = Math.floor(Math.random() * 256);
         let g = Math.floor(Math.random() * 256);
@@ -18,13 +15,11 @@ const loadGame = (x) => {
     }
 
     let random = () => Math.floor((Math.random() * x));
-
     goal = `${bgColor[random()]}`;
-
     hidden.textContent = goal.toUpperCase();
+}
 
-    let choices = document.querySelectorAll('#choices div');
-
+const setUpChoices = (x) => {
     for (let index = 0; index < x; index++) {
         choices[index].style.backgroundColor = `${bgColor[index]}`;
         choices[index].addEventListener('click', e => {
@@ -34,6 +29,7 @@ const loadGame = (x) => {
                     banner.style.backgroundColor = goal;
                     banner.style.transition = 'background-color 0.5s';
                     message.textContent = 'CORRECT!';
+                    loadBtn.textContent = 'PLAY AGAIN?';
                 }
             } else {
                 choices[index].style.backgroundColor = 'var(--bg-color)';
@@ -41,7 +37,14 @@ const loadGame = (x) => {
             }
         });
     }
+}
+const loadGame = (x) => {
+    gameSetup(x);
+    setUpChoices(x);
+}
+loadGame(tiles);
 
+const trimChoices = (x) => {
     if (x === 3) {
         for (let index = 3; index < 6; index++) {
             choices[index].style.display = 'none';
@@ -53,12 +56,11 @@ const loadGame = (x) => {
     }
 }
 
-// Load the Game
-loadGame(tiles);
-
-// Getting reference to the New Color button
-let loadBtn = document.querySelector('#tool-bar>button');
+const loadBtn = document.querySelector('#tool-bar>button');
 loadBtn.addEventListener('click', () => {
+    if (loadBtn.textContent === 'PLAY AGAIN?') {
+        loadBtn.textContent = 'NEW COLORS';
+    }
     loadGame(tiles);
     banner.style.backgroundColor = 'var(--global-color)';
     message.textContent = 'TRY ONE!';
@@ -71,49 +73,31 @@ loadBtn.addEventListener('mouseout', () => {
 });
 loadBtn.onfullscreenchange = loadBtn.classList.remove('selected');
 
-// Setting the click event listener for the setting buttons
-let modeSetters = document.querySelectorAll('#settings button');
-modeSetters[0].addEventListener('click', () => {
-    tiles = 3;
-    if (!(modeSetters[0].classList.contains('selected'))) {
-        modeSetters[0].classList.toggle('selected');
-        modeSetters[1].classList.toggle('selected');
-        banner.style.backgroundColor = 'var(--global-color)';
-        loadGame(tiles);
-    }
-    if (modeSetters[0].classList.contains('selection')) {
-        modeSetters[0].classList.remove('selection');
-    }
-});
-modeSetters[0].addEventListener('mouseover', () => {
-    if (!(modeSetters[0].classList.contains('selected'))) {
-        modeSetters[0].classList.add('selection');
-    }
-});
-modeSetters[0].addEventListener('mouseout', () => {
-    modeSetters[0].classList.remove('selection');
-});
+const modeSetters = document.querySelectorAll('#settings button');
+modeSetters.forEach(element => {
+    element.addEventListener('click', () => {
+        element.textContent === 'HARD' ? tiles = 6 : tiles = 3;
+        if (!(element.classList.contains('selected'))) {
+            modeSetters.forEach(setter => {
+                setter.classList.toggle('selected');
+            });
+            banner.style.backgroundColor = 'var(--global-color)';
+            loadGame(tiles);
+            trimChoices(tiles);
+        }
+        if (element.classList.contains('selection')) {
+            element.classList.remove('selection');
+        }
 
-modeSetters[1].addEventListener('click', () => {
-    tiles = 6
-    if (!(modeSetters[1].classList.contains('selected'))) {
-        modeSetters[1].classList.toggle('selected');
-        modeSetters[0].classList.toggle('selected');
-        banner.style.backgroundColor = 'var(--global-color)';
-        loadGame(tiles);
-    }
-    if (modeSetters[1].classList.contains('selection')) {
-        modeSetters[1].classList.remove('selection');
-    }
-});
-
-modeSetters[1].addEventListener('mouseover', () => {
-    if (!(modeSetters[1].classList.contains('selected'))) {
-        modeSetters[1].classList.add('selection');
-    }
-});
-modeSetters[1].addEventListener('mouseout', () => {
-    if (modeSetters[1].classList.contains('selection')) {
-        modeSetters[1].classList.remove('selection');
-    }
+    });
+    element.addEventListener('mouseover', () => {
+        if (!(element.classList.contains('selected'))) {
+            element.classList.add('selection');
+        }
+    });
+    element.addEventListener('mouseout', () => {
+        if (element.classList.contains('selection')) {
+            element.classList.remove('selection');
+        }
+    });
 });
