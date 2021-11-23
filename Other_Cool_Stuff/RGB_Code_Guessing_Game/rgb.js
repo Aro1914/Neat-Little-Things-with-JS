@@ -40,7 +40,7 @@ const loadGame = (x) => {
                 choices[index].style.transition = 'background-color 0.5s';
                 message.textContent = 'TRY AGAIN!';
             }
-        })
+        });
     }
 
     if (x === 3) {
@@ -52,7 +52,6 @@ const loadGame = (x) => {
             choices[index].style.display = 'block';
         }
     }
-
 }
 
 // Load the Game
