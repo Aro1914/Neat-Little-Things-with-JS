@@ -88,6 +88,9 @@ modeSetters.forEach(element => {
         if (element.classList.contains('selection')) {
             element.classList.remove('selection');
         }
+        if (loadBtn.textContent === 'PLAY AGAIN?') {
+            loadBtn.textContent = 'NEW COLORS';
+        }
 
     });
     element.addEventListener('mouseover', () => {
