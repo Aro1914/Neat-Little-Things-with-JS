@@ -16,7 +16,7 @@ const gameSetup = (x) => {
 
 	let random = () => Math.floor(Math.random() * x)
 	goal = `${bgColor[random()]}`
-	const randHue = `${String(goal).slice(3, goal.length)}`
+	const randHue = `${goal.slice(3, goal.length)}`
 	hidden.textContent = randHue.toUpperCase()
 }
 
