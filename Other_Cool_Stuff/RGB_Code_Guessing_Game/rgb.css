@@ -133,3 +133,10 @@ h1 span#rgb {
 		width: 80%;
 	}
 }
+
+/* insert media query for mobile */
+@media only screen and (max-width: 480px) {
+	h1 > span {
+		font-size: 35px;
+	}
+}
