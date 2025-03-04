@@ -1,18 +1,18 @@
 body > div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position:fixed;
-  height: 100%;
-  width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	height: 100%;
+	width: 100%;
 }
 
 button {
-  padding: 5px;
-  font-family: Arial;
-  border: 0px;
-  border-radius: 5px;
-  font-size: 40px;
-  font-weight: bolder;
-  align-items: center;
+	padding: 15px;
+	font-family: Arial;
+	border: 0px;
+	border-radius: 10px;
+	font-size: 40px;
+	font-weight: bold;
+	align-items: center;
 }
