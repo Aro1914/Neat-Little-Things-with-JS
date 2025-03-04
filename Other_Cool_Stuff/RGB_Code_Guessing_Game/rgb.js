@@ -33,7 +33,6 @@ const setUpChoices = (x) => {
 					: null
 			)
 			hasLost = choicesMade === tiles - 1
-			console.log({ hasLost, choicesMade })
 			if (choices[index].style.backgroundColor === goal) {
 				for (let i = 0; i < x; i++) {
 					choices[i].style.backgroundColor = goal
