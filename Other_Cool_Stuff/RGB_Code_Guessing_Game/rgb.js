@@ -5,7 +5,7 @@ const message = document.querySelector('#message')
 let tiles = 6
 let goal
 const choices = document.querySelectorAll('#choices div')
-
+let hasLost = false
 const gameSetup = (x) => {
 	for (let index = 0; index < x; index++) {
 		let r = Math.floor(Math.random() * 256)
@@ -21,9 +21,19 @@ const gameSetup = (x) => {
 }
 
 const setUpChoices = (x) => {
+	hasLost = false
 	for (let index = 0; index < x; index++) {
 		choices[index].style.backgroundColor = `${bgColor[index]}`
-		choices[index].addEventListener('click', (e) => {
+		const handleClick = () => {
+			if (hasLost) return
+			let choicesMade = 0
+			choices.forEach((element) =>
+				element.style.backgroundColor === 'var(--bg-color)'
+					? choicesMade++
+					: null
+			)
+			hasLost = choicesMade === tiles - 1
+			console.log({ hasLost, choicesMade })
 			if (choices[index].style.backgroundColor === goal) {
 				for (let i = 0; i < x; i++) {
 					choices[i].style.backgroundColor = goal
@@ -32,11 +42,16 @@ const setUpChoices = (x) => {
 					message.textContent = 'CORRECT!'
 					loadBtn.textContent = 'PLAY AGAIN?'
 				}
+			} else if (hasLost) {
+				message.textContent = 'YOU LOST!'
+				loadBtn.textContent = 'PLAY AGAIN?'
+				choices[index].removeEventListener('click', handleClick)
 			} else {
 				choices[index].style.backgroundColor = 'var(--bg-color)'
 				message.textContent = 'TRY AGAIN!'
 			}
-		})
+		}
+		choices[index].addEventListener('click', handleClick)
 	}
 }
 const loadGame = (x) => {
@@ -91,6 +106,7 @@ modeSetters.forEach((element) => {
 		}
 		if (loadBtn.textContent === 'PLAY AGAIN?') {
 			loadBtn.textContent = 'NEW COLORS'
+			message.textContent = 'TRY ONE!'
 		}
 	})
 	element.addEventListener('mouseover', () => {
